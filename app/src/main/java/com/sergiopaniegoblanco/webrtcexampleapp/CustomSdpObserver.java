@@ -11,7 +11,6 @@ import org.webrtc.SessionDescription;
 
 public class CustomSdpObserver implements SdpObserver {
 
-
     private String tag = this.getClass().getCanonicalName();
 
     CustomSdpObserver(String logTag) {

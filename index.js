@@ -24,21 +24,25 @@ wsServer.on('request', function(request) {
   // This is the most important callback for us, we'll handle
   // all messages from users here.
   connection.on('message', function(message) {
+    console.log("received message: ", message);
     var json = JSON.stringify(message, null, 4);
     var type = JSON.parse(message['utf8Data'])['type'];
     console.log(type);
     console.log(clients.length)
     if ((type == 'OFFER') && (clients.length == 2)) {
-        console.log(clients.length)
+        offer = message;
+        console.log("Clients len is ", clients.length)
         clients[1].send(JSON.stringify(message))
         console.log('OFFER!')
     } else if (type == 'ANSWER') {
         clients[0].send(JSON.stringify(message))
         console.log('ANSWER!')
-    } else if (type != 'OFFER'){
+    } else if (type != 'OFFER') {
         for (var i=0; i<clients.length; i++) {
-            // console.log(clients[i])
-            clients[i].send(JSON.stringify(message));
+//            console.log(clients[i]);
+//            if (i != index) {
+                clients[i].send(JSON.stringify(message));
+//            }
         }
     }
     if ((type == 'OFFER') && (clients.length < 2)) {
@@ -46,8 +50,10 @@ wsServer.on('request', function(request) {
         offer = message;
     }
     if (clients.length >= 2) {
-        clients[1].send(JSON.stringify(offer))
-        console.log('OFFER!')
+        if (offer) {
+            clients[1].send(JSON.stringify(offer))
+            console.log('OFFER!')
+        }
     }
   });
 

@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -29,6 +33,8 @@ dependencies {
     compile 'fi.vtt.nubomedia:kurento-room-client-android:1.1.2'
     testCompile 'junit:junit:4.12'
     compile 'org.whispersystems:webrtc-android:M59'
+//    compile 'org.webrtc:google-webrtc:1.0.+'
+
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     // compile "org.java-websocket:Java-WebSocket:1.3.0"
